@@ -29,13 +29,13 @@ _adm = player createDiaryRecord ["diary", ["Administration","
 
 _radio = player createDiaryRecord ["diary", ["Radios","
 <br/>
-<font size='18'>COMMAND CHANNELS (152 & 117F)</font>
+<font size='18'>COMMAND CHANNELS (152 and 117F)</font>
 <br/> 
-Channel 1 - Alpha Squad Leader & Fireteam Leaders
+Channel 1 - Alpha Squad Leader and Fireteam Leaders
 <br/> 
-Channel 2 - Bravo Squad Leader & Fireteam Leaders
+Channel 2 - Bravo Squad Leader and Fireteam Leaders
 <br/>
-Channel 3 - Charlie Squad Leader & Fireteam Leaders
+Channel 3 - Charlie Squad Leader and Fireteam Leaders
 <br/>
 Channel 4 - PLT. HQ, Squad Leaders, Support
 <br/><br/>
