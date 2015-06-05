@@ -841,7 +841,7 @@ class Mission
 					skill=0.60000002;
 					text="UnitCSAT_PLTHQ_FO";
 					init="GrpCSAT_PLTHQ = group this; [""fo"",this] call f_fnc_assignGear;";
-					description="INDFOR Forward Observer";
+					description="OPFOR Forward Observer";
 				};
 			};
 		};
