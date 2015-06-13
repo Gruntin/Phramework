@@ -195,4 +195,22 @@ if (isText _a) then {
     _unit call compile ("this = _this;"+ getText _a);
 };
 
+//Automatic ground gear for divers once they are above ground
+_groundClass = _path >> "groundClass";
+if (isText _groundClass) then {
+    [_unit, getText _groundClass] spawn {
+        private ["_unit"];
+
+        _unit = _this select 0;
+
+        waitUntil {sleep 0.02; vehicle _unit == _unit};
+        sleep 0.5;
+        waitUntil {sleep 0.02; !underwater _unit};;
+        waitUntil {sleep 0.02; isTouchingGround _unit};
+        sleep 1;
+
+        [_unit, _this select 1] call F_fnc_assignGearMan;
+    };
+};
+
 _unit setVariable ["f_var_assignGear_done", true, true];
