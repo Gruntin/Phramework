@@ -7,8 +7,14 @@ _unit = _this select 0;
 if (!(local _unit)) exitWith {};
 
 _faction = tolower (faction _unit);
+
 //Check variable f_gear, otherwise default to typeof
 _loadout = _unit getVariable ["F_Gear", (typeOf _unit)];
+
+if (count _this > 1) then {
+    //Allow overriding unit loadout via call parameters
+    _loadout = [_this, 1, _loadout, [""]] call bis_fnc_param;
+};
 
 // INSIGNIA (todo: move to the CfgLoadouts system)
 // This block will give units insignia on their uniforms.
@@ -193,6 +199,24 @@ if ((count _handguns) > 0) then {_unit addWeapon (_handguns call BIS_fnc_selectR
 _a = _path >> "init";
 if (isText _a) then {
     _unit call compile ("this = _this;"+ getText _a);
+};
+
+//Automatic ground gear for divers once they are above ground
+_groundClass = _path >> "groundClass";
+if (isText _groundClass) then {
+    [_unit, getText _groundClass] spawn {
+        private ["_unit"];
+
+        _unit = _this select 0;
+
+        waitUntil {sleep 0.02; vehicle _unit == _unit};
+        sleep 0.5;
+        waitUntil {sleep 0.02; !underwater _unit};;
+        waitUntil {sleep 0.02; isTouchingGround _unit};
+        sleep 1;
+
+        [_unit, _this select 1] call F_fnc_assignGearMan;
+    };
 };
 
 _unit setVariable ["f_var_assignGear_done", true, true];
