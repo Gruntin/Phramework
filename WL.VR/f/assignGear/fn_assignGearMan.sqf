@@ -7,8 +7,14 @@ _unit = _this select 0;
 if (!(local _unit)) exitWith {};
 
 _faction = tolower (faction _unit);
+
 //Check variable f_gear, otherwise default to typeof
 _loadout = _unit getVariable ["F_Gear", (typeOf _unit)];
+
+if (count _this > 1) then {
+    //Allow overriding unit loadout via call parameters
+    _loadout = [_this, 1, _loadout, [""]] call bis_fnc_param;
+};
 
 // INSIGNIA (todo: move to the CfgLoadouts system)
 // This block will give units insignia on their uniforms.
