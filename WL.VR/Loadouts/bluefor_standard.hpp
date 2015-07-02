@@ -101,6 +101,7 @@ class blu_f {
         uniform[] = {"U_B_CombatUniform_mcam","U_B_CombatUniform_mcam_vest"};  /// randomized
         vest[] = {"V_PlateCarrier1_rgr","V_PlateCarrier2_rgr"}; /// randomized
         headgear[] = {"H_HelmetB","H_HelmetSpecB"}; /// randomized
+	goggles[] = {"G_Combat","G_Aviator","G_Balaclava_combat"}; /// randomized
         backpack[] = {"B_AssaultPack_mcamo"}; /// randomized
         backpackItems[] = {"ACE_fieldDressing:3","ACE_morphine","ACE_IR_Strobe_item","ACE_earplugs"};
         weapons[] = {WEST_RIFLE}; /// randomized
@@ -234,6 +235,7 @@ class blu_f {
         uniform[] = {"U_B_CombatUniform_mcam"};  /// randomized
         vest[] = {"V_Chestrig_rgr"}; /// randomized
         headgear[] = {"H_Watchcap_camo"}; /// randomized
+	goggles[] = {"G_Combat","G_Aviator","G_Balaclava_combat"}; /// randomized
         weapons[] = {WEST_SPOTTER}; /// randomized
         magazines[] = {WEST_SPOTTER_MAG,WEST_SMOKE_WHITE,WEST_GRENADE};
         items[] = {"ACE_fieldDressing:3","ACE_morphine","ACE_earplugs", "ACRE_PRC343", "ACRE_PRC148"};
@@ -245,6 +247,7 @@ class blu_f {
         uniform[] = {"U_B_CombatUniform_mcam"};  /// randomized
         vest[] = {"V_Chestrig_rgr"}; /// randomized
         headgear[] = {"H_Watchcap_camo"}; /// randomized
+	goggles[] = {"G_Combat","G_Aviator","G_Balaclava_combat"}; /// randomized
         weapons[] = {WEST_SNIPER}; /// randomized
         magazines[] = {WEST_SNIPER_MAG,WEST_SMOKE_WHITE,WEST_GRENADE};
         items[] = {"ACE_fieldDressing:3","ACE_morphine","ACE_earplugs", "ACRE_PRC343"};
@@ -260,6 +263,7 @@ class blu_f {
         backpack[] = {"B_AssaultPack_blk"};
         vest[] = {"V_TacVest_blk"}; /// randomized
         headgear[] = {"H_PilotHelmetHeli_B"}; /// randomized
+	goggles[] = {"G_Combat","G_Aviator","G_Balaclava_combat"}; /// randomized
         weapons[] = {WEST_SMG}; /// randomized
         magazines[] = {WEST_SMG_MAG,WEST_SMOKE_WHITE};
         backpackItems[] += {"ACE_key_west","ACRE_PRC117F"};
@@ -280,6 +284,7 @@ class blu_f {
         uniform[] = {"U_B_CombatUniform_mcam"};  // randomized
         vest[] = {"V_TacVest_blk"}; // randomized
         headgear[] = {"H_Watchcap_camo"}; /// randomized
+	goggles[] = {"G_Combat","G_Aviator","G_Balaclava_combat"}; /// randomized
         backpack[] = {"B_Carryall_mcamo"};
         weapons[] = {WEST_CARBINE}; /// randomized
         magazines[] = {WEST_CARBINE_MAG,WEST_SMOKE_WHITE};
