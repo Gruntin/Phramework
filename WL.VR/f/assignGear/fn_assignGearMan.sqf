@@ -2,9 +2,38 @@
 // F3 - F3 Folk ARPS Assign Gear
 // Credits: Please see the F3 online manual (http://www.ferstaberinde.com/f3/en/)
 // ====================================================================================
+private ["_unit", "_faction", "_loadout", "_path"];
+
 _unit = _this select 0;
 
 if (!(local _unit)) exitWith {};
+
+if (isNil "f_var_medical_replacements") then {
+     switch (f_var_medical) do
+     {
+         case 1:
+         {
+            f_var_medical_standard = getArray (missionConfigFile >> "CfgLoadouts" >> "MEDICAL_BASIC" >> "STANDARD" >> "items");
+            f_var_medical_leader = getArray (missionConfigFile >> "CfgLoadouts" >> "MEDICAL_BASIC" >> "LEADER" >> "items");
+            f_var_medical_medic = getArray (missionConfigFile >> "CfgLoadouts" >> "MEDICAL_BASIC" >> "MEDIC" >> "items");
+            f_var_medical_vehicle = getArray (missionConfigFile >> "CfgLoadouts" >> "MEDICAL_BASIC" >> "VEHICLE" >> "items");
+         };
+        case 2:
+         {
+            f_var_medical_standard = getArray (missionConfigFile >> "CfgLoadouts" >> "MEDICAL_ADVANCED" >> "STANDARD" >> "items");
+            f_var_medical_leader = getArray (missionConfigFile >> "CfgLoadouts" >> "MEDICAL_ADVANCED" >> "LEADER" >> "items");
+            f_var_medical_medic = getArray (missionConfigFile >> "CfgLoadouts" >> "MEDICAL_ADVANCED" >> "MEDIC" >> "items");
+            f_var_medical_vehicle = getArray (missionConfigFile >> "CfgLoadouts" >> "MEDICAL_ADVANCED" >> "VEHICLE" >> "items");
+         };
+     };
+
+    f_var_medical_replacements = [
+        ["MEDICAL_STANDARD", f_var_medical_standard],
+        ["MEDICAL_LEADER", f_var_medical_leader],
+        ["MEDICAL_MEDIC", f_var_medical_medic],
+        ["MEDICAL_VEHICLE", f_var_medical_vehicle]
+    ];
+};
 
 _faction = tolower (faction _unit);
 //Check variable f_gear, otherwise default to typeof
@@ -16,7 +45,11 @@ _loadout = _unit getVariable ["F_Gear", (typeOf _unit)];
     #include "f_assignInsignia.sqf"
 };*/
 
-_path = missionConfigFile >> "CfgLoadouts" >> _faction >> _loadout;
+if (isNil "F_Gear_Path_Override") then {
+    _path = missionConfigFile >> "CfgLoadouts" >> _faction >> _loadout;
+} else {
+    _path = [_faction, _loadout] call F_Gear_Path_Override;
+};
 
 if(!isClass(_path)) exitWith {
     if (isPlayer _unit) then {
@@ -39,6 +72,25 @@ _magazines = getArray(_path >> "magazines");
 _items = getArray(_path >> "items");
 _linkedItems = getArray(_path >> "linkedItems");
 _attachments = getArray(_path >> "attachments");
+
+if (isNil "F_Gear_Replace_MedicalItems") then {
+    F_Gear_Replace_MedicalItems = {
+        _array = _this;
+        {
+            _itemsEntry = _x;
+            _itemsIndex = _forEachIndex;
+            {
+                if ((_x select 0) == _itemsEntry) then {
+                    _array deleteAt _itemsIndex;
+                    {_array pushBack _x} forEach (_x select 1);
+                };
+            } forEach f_var_medical_replacements;
+        } forEach _array;
+    };
+};
+
+_backpackItems call F_Gear_Replace_MedicalItems;
+_items call F_Gear_Replace_MedicalItems;
 
 removeAllWeapons _unit;
 removeAllAssignedItems _unit;
@@ -204,6 +256,9 @@ if ((count _handguns) > 0) then {_unit addWeapon (_handguns call BIS_fnc_selectR
         if (!(_loadout in F_GEAR_ERROR_LOADOUTS)) then {
             F_GEAR_ERROR_LOADOUTS pushBack _loadout;
             diag_log text format ["Failed To add Magazine %1 to %2", _x, _loadout];
+            if (isServer && hasInterface) then {
+                systemChat format ["Failed To add Magazine %1 to %2", _x, _loadout];
+            };
         };
     };
 } forEach _magazinesNotAdded;
