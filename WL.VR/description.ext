@@ -1,10 +1,10 @@
 
 // ============================================================================================
 
-// TAW Tonic - View Distance Script
-// Credits: TAW Tonic
+// CH View Distance Script
+// Credits: Champ-1
 
-#include "taw_vd\dialog.hpp"
+#include "CHVD\dialog.hpp"
 
 // ============================================================================================
 
@@ -393,7 +393,7 @@ class CfgRespawnTemplates
 class CfgFunctions
 {
 	#include "ws_fnc\config.hpp"
-	#include "taw_vd\CfgFunctions.hpp"
+	#include "CHVD\CfgFunctions.hpp"
 
 	class F_DAC {
 	    class F_DAC {
