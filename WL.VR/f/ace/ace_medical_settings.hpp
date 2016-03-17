@@ -97,7 +97,7 @@ class ace_medical_preventInstaDeath
 {
 	category = "$STR_ace_medical_Category_Medical";
 	typeName = "BOOL";
-	value = 0;
+	value = 1;
 };
 class ace_medical_enableRevive
 {
